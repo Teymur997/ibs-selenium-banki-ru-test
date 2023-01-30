@@ -2,10 +2,7 @@ package ru.ibs.framework.pages;
 
 import io.qameta.allure.Step;
 import org.junit.jupiter.api.Assertions;
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import ru.ibs.framework.utils.Deposit;
@@ -35,6 +32,8 @@ public class DepositPage extends BasePage {
     private WebElement bankList;
 
     @FindBy(xpath = "//div[contains(@class,'FlexboxGrid___sc-fhs6fg-0 hjbxXD')]//button")
+    private WebElement settingsShowButton;
+    @FindBy(xpath = "//button[@class=\"Button___sc-mcd2wg-2 efzCpC\"]")
     private WebElement showButton;
 
     @FindBy(xpath = "//div[@class=\"Text___sc-14s2757-0 kDxXVe\"]")
@@ -47,7 +46,7 @@ public class DepositPage extends BasePage {
     public DepositPage closeCashBackWindow() {
         try {
             waitUntilElementIsVisible(cashBackWindow);
-            driverManager.getDriver().switchTo().defaultContent();
+            actions.moveByOffset(200, 200).click().perform();
         } catch (NoSuchElementException | TimeoutException ignore) {
         }
         return pageManager.getPage(DepositPage.class);
@@ -147,7 +146,7 @@ public class DepositPage extends BasePage {
 
     @Step("Нажатие кнопки \"Показать\"")
     public DepositPage clickShowButton() {
-        showButton.click();
+        settingsShowButton.click();
         return pageManager.getPage(DepositPage.class);
     }
 
