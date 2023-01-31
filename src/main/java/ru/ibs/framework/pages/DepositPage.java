@@ -149,13 +149,13 @@ public class DepositPage extends BasePage {
                         "Количество подходящих вкладов не соответствует " + count),
                 () -> Assertions.assertEquals(deposit.getRate(),
                         getValue(deposit.getBankName(), "Cтавка"),
-                        "Актуальное значение процентной ставки вклада не равна " + deposit.getRate()),
+                        "Актуальное значение процентной ставки вклада не равно " + deposit.getRate()),
                 () -> Assertions.assertEquals(deposit.getPeriod(),
                         getValue(deposit.getBankName(), "Срок"),
-                        "Актуальное значение срока вклада не равна " + deposit.getPeriod()),
+                        "Актуальное значение срока вклада не равно " + deposit.getPeriod()),
                 () -> Assertions.assertEquals(deposit.getProfit(),
                         getValue(deposit.getBankName(), "Доход"),
-                        "Актуальное значение дохода вклада не равна " + deposit.getProfit())
+                        "Актуальное значение дохода вклада не равно " + deposit.getProfit())
         );
         return pageManager.getPage(DepositPage.class);
     }
