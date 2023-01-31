@@ -10,7 +10,7 @@ import ru.ibs.framework.utils.Deposit;
 import java.util.List;
 
 public class DepositPage extends BasePage {
-    @FindBy(xpath = "//div[@class=\"Modal___sc-fqhr8t-2 cDCRpi\"]")
+    @FindBy(xpath = "//div[@class=\"sc-hBEYos czEoCN\"]")
     private WebElement cashBackWindow;
 
     @FindBy(xpath = "//div[@id=\"deposit_search_form\"]")
@@ -19,27 +19,24 @@ public class DepositPage extends BasePage {
     @FindBy(xpath = "//div[@class=\"SearchModal__StyledBody-sc-wuz0ak-1 eQdrBU\"]//input")
     private List<WebElement> depositInputFields;
 
-    @FindBy(xpath = "//div[@class=\"FlexboxGrid___sc-fhs6fg-0 cEciIm\"]//span")
+    @FindBy(xpath = "//label[@class=\"sc-bBXqnf kzFhYx\"]//span ")
     private List<WebElement> depositCheckbox;
 
-    @FindBy(xpath = "//div[@class=\"DropdownList___sc-19399gi-3 ccVKRu\"]//li")
+    @FindBy(xpath = "//div[@data-placement]//li")
     private List<WebElement> dropDownList;
-
-    @FindBy(xpath = "//li[@class=\"MultiSelectDropdownList___sc-1rhwus9-1 fahRpT\"]")
-    private List<WebElement> bankListDropdown;
 
     @FindBy(xpath = "//div[@class=\"MultiSelectDropdown___sc-1mda0kj-1 kFKwxK\"]")
     private WebElement bankList;
 
-    @FindBy(xpath = "//div[contains(@class,'FlexboxGrid___sc-fhs6fg-0 hjbxXD')]//button")
+    @FindBy(xpath = "//button[@class=\"sc-eCssSg xVSDo\"]")
     private WebElement settingsShowButton;
-    @FindBy(xpath = "//button[@class=\"Button___sc-mcd2wg-2 efzCpC\"]")
+    @FindBy(xpath = "//button[@class=\"sc-eCssSg blUkiR\"]")
     private WebElement showButton;
 
-    @FindBy(xpath = "//div[@class=\"Text___sc-14s2757-0 kDxXVe\"]")
+    @FindBy(xpath = "//div[@class=\"sc-kIeTtH hNSQWJ\"]")
     private WebElement suitableDepositCount;
 
-    @FindBy(xpath = "//div[@class=\"FlexboxGrid___sc-fhs6fg-0 cLYEEl\"]")
+    @FindBy(xpath = "//div[@class=\"sc-gsTCUz LVeSn\"]")
     private List<WebElement> depositResults;
 
     @Step("Закрытие окна акции \"Кэшбэк за вклад\"")
@@ -54,13 +51,7 @@ public class DepositPage extends BasePage {
 
     @Step("Нажатие кнопки настроек вклада")
     public DepositPage clickDepositSettingsButton() {
-        depositSearchForm
-                .findElements(By.xpath(".//button"))
-                .stream()
-                .filter(element -> element.getText().length() == 0)
-                .findAny()
-                .get()
-                .click();
+        settingsShowButton.click();
         return pageManager.getPage(DepositPage.class);
     }
 
@@ -99,7 +90,7 @@ public class DepositPage extends BasePage {
                         .get();
                 banksDropDownField.click();
                 for (String bankName : value) {
-                    WebElement bank = bankListDropdown.stream()
+                    WebElement bank = dropDownList.stream()
                             .filter(element -> element.getText().contains(bankName))
                             .findAny()
                             .get();
@@ -146,7 +137,7 @@ public class DepositPage extends BasePage {
 
     @Step("Нажатие кнопки \"Показать\"")
     public DepositPage clickShowButton() {
-        settingsShowButton.click();
+        showButton.click();
         return pageManager.getPage(DepositPage.class);
     }
 
@@ -177,7 +168,7 @@ public class DepositPage extends BasePage {
                 .get();
         return currentBank.findElements(By.xpath(".//div[@data-test=\"text\"]")).stream()
                 .filter(element -> element.getText().contains(indicator))
-                .map(element -> element.findElement(By.xpath(".//following-sibling::div")).getText())
+                .map(element -> element.findElement(By.xpath(".//following-sibling::div[@data-test=\"text\"]")).getText())
                 .findAny()
                 .get();
     }

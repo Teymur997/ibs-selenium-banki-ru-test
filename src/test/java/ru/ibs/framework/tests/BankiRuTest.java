@@ -4,14 +4,10 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.MethodSource;
 import ru.ibs.framework.base.BaseTests;
 import ru.ibs.framework.pages.blocks.MenuBlockPage;
 import ru.ibs.framework.utils.AllureListener;
 import ru.ibs.framework.utils.Deposit;
-
-import java.util.stream.Stream;
 
 @ExtendWith(AllureListener.class)
 public class BankiRuTest extends BaseTests {

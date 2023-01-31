@@ -14,11 +14,6 @@ public class BaseTests {
 
     protected TestPropertiesManager testPropertiesManager = TestPropertiesManager.getInstance();
 
-//    @BeforeAll
-//    public static void beforeAll() {
-//        InitManager.initFramework();
-//    }
-
     @BeforeEach
     public void setUp() {
         InitManager.initFramework();
@@ -30,9 +25,4 @@ public class BaseTests {
         pageManager.clearPages();
         InitManager.quitFramework();
     }
-
-//    @AfterAll
-//    static void afterAll() {
-//        InitManager.quitFramework();
-//    }
 }
