@@ -34,8 +34,8 @@ public class BankiRuParameterizedTest extends BaseTests {
                 .checkValueField(depositParameters.getDepositValue())
                 .checkPeriodField(depositParameters.getDepositPeriod())
                 .checkTypeField(depositParameters.getType())
-                .checkChoosedBanks(depositParameters.getBanks())
-                .checkChoosedAdditionals(depositParameters.getAdditionals())
+                .checkSelectedBanks(depositParameters.getBanks())
+                .checkSelectedAdditionals(depositParameters.getAdditionals())
                 .clickShowButton()
                 .closeCashBackWindow()
                 .checkResult(count, deposit);

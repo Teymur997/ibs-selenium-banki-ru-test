@@ -4,7 +4,6 @@ import io.qameta.allure.Step;
 import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import ru.ibs.framework.utils.Deposit;
 
 import java.util.List;
@@ -164,7 +163,7 @@ public class DepositPage extends BasePage {
     }
 
     @Step("Проверка состояния чекбоксов выбранных банков")
-    public DepositPage checkChoosedBanks(String... expectedBanks) {
+    public DepositPage checkSelectedBanks(String... expectedBanks) {
         WebElement banksDropDownField = depositInputFields.stream()
                 .filter(element -> element.findElement(By.xpath(".//following-sibling::label"))
                         .getText().contains("Банки"))
@@ -182,7 +181,7 @@ public class DepositPage extends BasePage {
     }
 
     @Step("Проверка состояния чекбоксов выбора дополнительных опций")
-    public DepositPage checkChoosedAdditionals(String... additionals) {
+    public DepositPage checkSelectedAdditionals(String... additionals) {
         for (String additional : additionals) {
             WebElement checkBox = depositCheckbox.stream()
                     .filter(element -> element.getText().contains(additional))

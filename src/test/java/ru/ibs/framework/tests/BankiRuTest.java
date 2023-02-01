@@ -29,8 +29,8 @@ public class BankiRuTest extends BaseTests {
                 .checkValueField("500000")
                 .checkPeriodField("2 года")
                 .checkTypeField("Детский")
-                .checkChoosedBanks("Ак Барс Банк", "Банк «РОССИЯ»", "Сбербанк")
-                .checkChoosedAdditionals("С выплатой процентов")
+                .checkSelectedBanks("Ак Барс Банк", "Банк «РОССИЯ»", "Сбербанк")
+                .checkSelectedAdditionals("С выплатой процентов")
                 .clickShowButton()
                 .closeCashBackWindow()
                 .checkResult("7", SberBank);
