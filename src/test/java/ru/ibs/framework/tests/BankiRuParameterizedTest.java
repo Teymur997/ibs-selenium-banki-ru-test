@@ -31,6 +31,11 @@ public class BankiRuParameterizedTest extends BaseTests {
                 .valueInput("Тип вклада", depositParameters.getType())
                 .valueInput("Банки", depositParameters.getBanks())
                 .valueInput("Опции", depositParameters.getAdditionals())
+                .checkValueField(depositParameters.getDepositValue())
+                .checkPeriodField(depositParameters.getDepositPeriod())
+                .checkTypeField(depositParameters.getType())
+                .checkChoosedBanks(depositParameters.getBanks())
+                .checkChoosedAdditionals(depositParameters.getAdditionals())
                 .clickShowButton()
                 .closeCashBackWindow()
                 .checkResult(count, deposit);
@@ -40,13 +45,13 @@ public class BankiRuParameterizedTest extends BaseTests {
     public static Stream<Parameters> depositInfo() {
         return Stream.of(
                 new Parameters(
-                        new DepositParameters("1000000", DepositPeriod.SIX_MONTH.getPeriod(), DepositType.ORDINARY_DEPOSITS.getType(),
+                        new DepositParameters("1 000 000", DepositPeriod.SIX_MONTH.getPeriod(), DepositType.ORDINARY_DEPOSITS.getType(),
                                 new String[]{"Тинькофф", "ВТБ", "Открытие", "Газпромбанк", "Сбербанк"},
                                 new String[]{"Со снятием", "С пополнением", "С капитализацией"}),
                         "15",
                         new Deposit("Тинькофф Банк", "5,63%", "182 дн.", "от 27 740 ₽")),
                 new Parameters(
-                        new DepositParameters("500000", DepositPeriod.TWO_YEARS.getPeriod(), DepositType.CHILDISH.getType(),
+                        new DepositParameters("500 000", DepositPeriod.TWO_YEARS.getPeriod(), DepositType.CHILDISH.getType(),
                                 new String[]{"Ак Барс Банк", "Банк «РОССИЯ»", "Сбербанк"},
                                 new String[]{"С выплатой процентов"}),
                         "7",

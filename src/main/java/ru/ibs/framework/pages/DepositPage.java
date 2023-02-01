@@ -19,14 +19,14 @@ public class DepositPage extends BasePage {
     @FindBy(xpath = "//div[@class=\"SearchModal__StyledBody-sc-wuz0ak-1 eQdrBU\"]//input")
     private List<WebElement> depositInputFields;
 
-    @FindBy(xpath = "//label[@class=\"sc-bBXqnf kzFhYx\"]//span ")
+    @FindBy(xpath = "//label[@class=\"sc-bBXqnf kzFhYx\"]//span")
     private List<WebElement> depositCheckbox;
 
     @FindBy(xpath = "//div[@data-placement]//li")
     private List<WebElement> dropDownList;
 
-    @FindBy(xpath = "//div[@class=\"MultiSelectDropdown___sc-1mda0kj-1 kFKwxK\"]")
-    private WebElement bankList;
+    @FindBy(xpath = "//ul[@class=\"sc-jUEnpm gXySZn\"]//li")
+    private List<WebElement> checkedBanks;
 
     @FindBy(xpath = "//button[@class=\"sc-eCssSg xVSDo\"]")
     private WebElement settingsShowButton;
@@ -95,9 +95,6 @@ public class DepositPage extends BasePage {
                             .findAny()
                             .get();
                     bank.click();
-//                    wait.until(ExpectedConditions.attributeContains(bank.findElement(By.xpath(".//input")),
-//                            "checked",
-//                            ""));
                 }
                 banksDropDownField.click();
                 break;
@@ -122,16 +119,80 @@ public class DepositPage extends BasePage {
                             .findAny()
                             .get();
                     checkBox.click();
-
-                    wait.until(ExpectedConditions.attributeContains(checkBox.findElement(By.xpath(".//preceding-sibling::input")),
-                            "checked",
-                            "true"));
                 }
                 break;
             default:
                 Assertions.fail("Поле " + fieldName + " отсутствует");
         }
         waitForStability(5000, 250);
+        return pageManager.getPage(DepositPage.class);
+    }
+
+    @Step("Проверка корректности введённой суммы вклада")
+    public DepositPage checkValueField(String expected) {
+        String actual = depositInputFields.stream()
+                .filter(element -> element.findElement(By.xpath(".//following-sibling::label"))
+                        .getText().contains("Сумма"))
+                .findAny()
+                .get().getAttribute("value");
+        Assertions.assertEquals(expected, actual, "Значение в поле \"Сумма\" не равно введенному значению " + expected);
+        return pageManager.getPage(DepositPage.class);
+    }
+
+    @Step("Проверка корректности выбранного срока вклада")
+    public DepositPage checkPeriodField(String expected) {
+        String actual = depositInputFields.stream()
+                .filter(element -> element.findElement(By.xpath(".//following-sibling::label"))
+                        .getText().contains("Срок"))
+                .map(element -> element.findElement(By.xpath(".//following-sibling::div[@data-test=\"dropdown\"]")))
+                .findAny()
+                .get().getText();
+        Assertions.assertEquals(expected, actual, "Значение в поле \"Срок\" не равно выбранному значению \"" + expected + "\"");
+        return pageManager.getPage(DepositPage.class);
+    }
+
+    @Step("Проверка корректности выбранного типа вклада")
+    public DepositPage checkTypeField(String expected) {
+        String actual = depositInputFields.stream()
+                .filter(element -> element.findElement(By.xpath(".//following-sibling::label"))
+                        .getText().contains("Тип вклада"))
+                .map(element -> element.findElement(By.xpath(".//following-sibling::div[@data-test=\"dropdown\"]")))
+                .findAny()
+                .get().getText();
+        Assertions.assertEquals(expected, actual, "Значение в поле \"Тип вклада\" не равно выбранному значению \"" + expected + "\"");
+        return pageManager.getPage(DepositPage.class);
+    }
+
+    @Step("Проверка состояния чекбоксов выбранных банков")
+    public DepositPage checkChoosedBanks(String... expectedBanks) {
+        WebElement banksDropDownField = depositInputFields.stream()
+                .filter(element -> element.findElement(By.xpath(".//following-sibling::label"))
+                        .getText().contains("Банки"))
+                .map(element -> element.findElement(By.xpath(".//..")))
+                .findAny()
+                .get();
+        banksDropDownField.click();
+        for (String bankName : expectedBanks) {
+            boolean isBankChoosed = checkedBanks.stream()
+                    .anyMatch(element -> element.getText().contains(bankName));
+            Assertions.assertTrue(isBankChoosed, "Банк \"" + bankName + "\"не выбран");
+        }
+        banksDropDownField.click();
+        return pageManager.getPage(DepositPage.class);
+    }
+
+    @Step("Проверка состояния чекбоксов выбора дополнительных опций")
+    public DepositPage checkChoosedAdditionals(String... additionals) {
+        for (String additional : additionals) {
+            WebElement checkBox = depositCheckbox.stream()
+                    .filter(element -> element.getText().contains(additional))
+                    .findAny()
+                    .get();
+            boolean isAdditionalChecked = checkBox.findElement(By.xpath(".//preceding-sibling::input"))
+                    .getAttribute("checked")
+                    .contains("true");
+            Assertions.assertTrue(isAdditionalChecked, "Дополнительная опция \"" + additional + "\" не выбрана");
+        }
         return pageManager.getPage(DepositPage.class);
     }
 
