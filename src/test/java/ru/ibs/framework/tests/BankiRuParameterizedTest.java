@@ -48,7 +48,7 @@ public class BankiRuParameterizedTest extends BaseTests {
                         new DepositParameters("1 000 000", DepositPeriod.SIX_MONTH.getPeriod(), DepositType.ORDINARY_DEPOSITS.getType(),
                                 new String[]{"Тинькофф", "ВТБ", "Открытие", "Газпромбанк", "Сбербанк"},
                                 new String[]{"Со снятием", "С пополнением", "С капитализацией"}),
-                        "15",
+                        "14",
                         new Deposit("Тинькофф Банк", "5,63%", "182 дн.", "от 27 740 ₽")),
                 new Parameters(
                         new DepositParameters("500 000", DepositPeriod.TWO_YEARS.getPeriod(), DepositType.CHILDISH.getType(),

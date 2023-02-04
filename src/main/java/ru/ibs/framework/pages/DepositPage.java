@@ -12,30 +12,27 @@ public class DepositPage extends BasePage {
     @FindBy(xpath = "//div[@class=\"sc-hBEYos czEoCN\"]")
     private WebElement cashBackWindow;
 
-    @FindBy(xpath = "//div[@id=\"deposit_search_form\"]")
-    private WebElement depositSearchForm;
-
     @FindBy(xpath = "//div[@class=\"SearchModal__StyledBody-sc-wuz0ak-1 eQdrBU\"]//input")
     private List<WebElement> depositInputFields;
 
-    @FindBy(xpath = "//label[@class=\"sc-bBXqnf kzFhYx\"]//span")
+    @FindBy(xpath = "//label[@class=\"Checkbox___sc-h4eidb-1 lmixWG\"]//span")
     private List<WebElement> depositCheckbox;
 
     @FindBy(xpath = "//div[@data-placement]//li")
     private List<WebElement> dropDownList;
 
-    @FindBy(xpath = "//ul[@class=\"sc-jUEnpm gXySZn\"]//li")
+    @FindBy(xpath = "//ul[@class=\"MultiSelectDropdownList___sc-1rhwus9-0 crLBBK\"]//li")
     private List<WebElement> checkedBanks;
 
-    @FindBy(xpath = "//button[@class=\"sc-eCssSg xVSDo\"]")
+    @FindBy(xpath = "//button[@class=\"Button___sc-mcd2wg-2 gjpWjG\"]")
     private WebElement settingsShowButton;
-    @FindBy(xpath = "//button[@class=\"sc-eCssSg blUkiR\"]")
+    @FindBy(xpath = "//button[@class=\"Button___sc-mcd2wg-2 EXrjP\"]")
     private WebElement showButton;
 
-    @FindBy(xpath = "//div[@class=\"sc-kIeTtH hNSQWJ\"]")
+    @FindBy(xpath = "//div[@class=\"Text___sc-14s2757-0 kDxXVe\"]")
     private WebElement suitableDepositCount;
 
-    @FindBy(xpath = "//div[@class=\"sc-gsTCUz LVeSn\"]")
+    @FindBy(xpath = "//div[contains(@class, 'styled__StyledListItem')]")
     private List<WebElement> depositResults;
 
     @Step("Закрытие окна акции \"Кэшбэк за вклад\"")
