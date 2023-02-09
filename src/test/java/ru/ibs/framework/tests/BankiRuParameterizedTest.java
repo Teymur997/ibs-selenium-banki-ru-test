@@ -1,6 +1,5 @@
 package ru.ibs.framework.tests;
 
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -12,9 +11,8 @@ import java.util.stream.Stream;
 
 @ExtendWith(AllureListener.class)
 public class BankiRuParameterizedTest extends BaseTests {
-    @ParameterizedTest
+    @ParameterizedTest(name = "Поиск вклада с заданными параметрами")
     @MethodSource("depositInfo")
-    @DisplayName("Поиск вклада с заданными параметрами")
     public void bankiTest(Parameters parameter) {
         Deposit deposit = parameter.getDeposit();
         String count = parameter.getCount();
