@@ -12,7 +12,6 @@ import ru.ibs.framework.utils.Deposit;
 @ExtendWith(AllureListener.class)
 public class BankiRuTest extends BaseTests {
     @Test
-    @Disabled
     @DisplayName("Поиск вклада")
     public void bankiTest() {
         Deposit SberBank = new Deposit("Сбербанк", "6,80%", "730 дн.", "от 72 514 ₽");
@@ -26,7 +25,7 @@ public class BankiRuTest extends BaseTests {
                 .valueInput("Тип вклада", "Детский")
                 .valueInput("Банки", "Ак Барс Банк", "Банк «РОССИЯ»", "Сбербанк")
                 .valueInput("Опции", "С выплатой процентов")
-                .checkValueField("500000")
+                .checkValueField("500 000")
                 .checkPeriodField("2 года")
                 .checkTypeField("Детский")
                 .checkSelectedBanks("Ак Барс Банк", "Банк «РОССИЯ»", "Сбербанк")

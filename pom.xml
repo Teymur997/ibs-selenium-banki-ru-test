@@ -87,7 +87,7 @@
                     <properties>
                         <property>
                             <name>listener</name>
-                            <value>ru.ibs.ru.ibs.framework.utils.AllureListener</value>
+                            <value>ru.ibs.framework.utils.AllureListener</value>
                         </property>
                     </properties>
 
